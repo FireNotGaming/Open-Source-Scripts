@@ -1,48 +1,9 @@
-function MoveNameChanger(move1, move2, move3, move4, ultname)
-    local player = game.Players.LocalPlayer
-    local playerGui = player.PlayerGui
-    local hotbar = playerGui:FindFirstChild("Hotbar")
-    local backpack = hotbar:FindFirstChild("Backpack")
-    local hotbarFrame = backpack:FindFirstChild("Hotbar")
-    
-    -- Button 1
-    local baseButton1 = hotbarFrame:FindFirstChild("1").Base
-    local ToolName1 = baseButton1.ToolName
-    ToolName1.Text = move1
-    
-    -- Button 2
-    local baseButton2 = hotbarFrame:FindFirstChild("2").Base
-    local ToolName2 = baseButton2.ToolName
-    ToolName2.Text = move2
-    
-    -- Button 3
-    local baseButton3 = hotbarFrame:FindFirstChild("3").Base
-    local ToolName3 = baseButton3.ToolName
-    ToolName3.Text = move3
-    
-    -- Button 4
-    local baseButton4 = hotbarFrame:FindFirstChild("4").Base
-    local ToolName4 = baseButton4.ToolName
-    ToolName4.Text = move4
-    -- Ult Name
-    local function waitForGui()
-        local player = game.Players.LocalPlayer
-        local playerGui = player:WaitForChild("PlayerGui")
-        
-        while true do
-            local screenGui = playerGui:FindFirstChild("ScreenGui")
-            if screenGui then
-                local magicHealthFrame = screenGui:FindFirstChild("MagicHealth")
-                if magicHealthFrame then
-                    local textLabel = magicHealthFrame:FindFirstChild("TextLabel")
-                    if textLabel then
-                        textLabel.Text = ultname 
-                        return
-                    end
-                end
-            end
-            wait(1)
-        end
-    end
-    waitForGui()
+function useMove(moveName)
+local args = {
+	{
+		Tool = game:GetService("Players").LocalPlayer:WaitForChild("Backpack"):WaitForChild(moveName),
+		Goal = "Console Move"
+	}
+}
+game:GetService("Players").LocalPlayer.Character:WaitForChild("Communicate"):FireServer(unpack(args))
 end
